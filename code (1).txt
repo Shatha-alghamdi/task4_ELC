@@ -1,94 +1,25 @@
-#define in1   3
-#define in2   4
-#define in3   5
-#define in4   6
-
-#define ir_sensor  9
-
-void move_backward()
+#include <LedControl.h>
+int DIN = 12;
+int CS =  11;
+int CLK = 10;
+LedControl lc=LedControl(DIN,CLK,CS,0);
+void setup(){
+ lc.shutdown(0,false);       
+ lc.setIntensity(0,15);      
+}
+void loop(){ 
+    byte SMILE[8]=   {0x00,0x00,0xff,0x81,0xff,0x00,0x00,0x00};
+        printByte(SMILE);
+         delay(1000);
+             byte SAD[8]=   {0x00,0x00,0x00,0xff,0xff,0x00,0x00,0x00};
+        printByte(SAD);
+         delay(1000);
+ }
+void printByte(byte character [])
 {
- digitalWrite(in1,HIGH);
- digitalWrite(in2,LOW);
- digitalWrite(in3,HIGH);
- digitalWrite(in4,LOW);
-}
-
-void move_forward()
-{
- digitalWrite(in1,LOW);
- digitalWrite(in2,HIGH);
- digitalWrite(in3,LOW);
- digitalWrite(in4,HIGH);
-}
-
-void robot_stop()
-{
- digitalWrite(in1,LOW);
- digitalWrite(in2,LOW);
- digitalWrite(in3,LOW);
- digitalWrite(in4,LOW);
-}
-
-void move_right()
-{
-  digitalWrite(in1,HIGH);
- digitalWrite(in2,LOW);
- digitalWrite(in3,LOW);
- digitalWrite(in4,HIGH);
-}
-
-void move_left()
-{
-  digitalWrite(in1,LOW);
- digitalWrite(in2,HIGH);
- digitalWrite(in3,HIGH);
- digitalWrite(in4,LOW);
-}
-
-void setup() {
-  // put your setup code here, to run once:
-   pinMode(in1,OUTPUT);
-   pinMode(in2,OUTPUT);
-   pinMode(in3,OUTPUT);
-   pinMode(in4,OUTPUT);
-   
-   pinMode(ir_sensor,INPUT);
-   /*
-  move_forward();
-   delay(4000);
-   robot_stop();
-   delay(1000);
-  move_right();
-  delay(150);
-   robot_stop();
-   delay(1000);
-   move_forward();
-   delay(4000);
-   robot_stop();
-*/
-   
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-   
-   /*
-   move_forward();
-   delay(2000);
-   robot_stop();
-   delay(2000);
-   move_backward();
-   delay(2000);
-   robot_stop();
-   delay(2000);
-  */
-
-if(digitalRead(ir_sensor)==HIGH) {move_forward();}
-if(digitalRead(ir_sensor)==LOW) 
+  int i = 0;
+  for(i=0;i<8;i++)
   {
-  robot_stop();delay(1000);
-  move_backward();
-  delay(1000);
-  } 
- 
+    lc.setRow(0,i,character[i]);
+  }
 }
