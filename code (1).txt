@@ -1,0 +1,94 @@
+#define in1   3
+#define in2   4
+#define in3   5
+#define in4   6
+
+#define ir_sensor  9
+
+void move_backward()
+{
+ digitalWrite(in1,HIGH);
+ digitalWrite(in2,LOW);
+ digitalWrite(in3,HIGH);
+ digitalWrite(in4,LOW);
+}
+
+void move_forward()
+{
+ digitalWrite(in1,LOW);
+ digitalWrite(in2,HIGH);
+ digitalWrite(in3,LOW);
+ digitalWrite(in4,HIGH);
+}
+
+void robot_stop()
+{
+ digitalWrite(in1,LOW);
+ digitalWrite(in2,LOW);
+ digitalWrite(in3,LOW);
+ digitalWrite(in4,LOW);
+}
+
+void move_right()
+{
+  digitalWrite(in1,HIGH);
+ digitalWrite(in2,LOW);
+ digitalWrite(in3,LOW);
+ digitalWrite(in4,HIGH);
+}
+
+void move_left()
+{
+  digitalWrite(in1,LOW);
+ digitalWrite(in2,HIGH);
+ digitalWrite(in3,HIGH);
+ digitalWrite(in4,LOW);
+}
+
+void setup() {
+  // put your setup code here, to run once:
+   pinMode(in1,OUTPUT);
+   pinMode(in2,OUTPUT);
+   pinMode(in3,OUTPUT);
+   pinMode(in4,OUTPUT);
+   
+   pinMode(ir_sensor,INPUT);
+   /*
+  move_forward();
+   delay(4000);
+   robot_stop();
+   delay(1000);
+  move_right();
+  delay(150);
+   robot_stop();
+   delay(1000);
+   move_forward();
+   delay(4000);
+   robot_stop();
+*/
+   
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+   
+   /*
+   move_forward();
+   delay(2000);
+   robot_stop();
+   delay(2000);
+   move_backward();
+   delay(2000);
+   robot_stop();
+   delay(2000);
+  */
+
+if(digitalRead(ir_sensor)==HIGH) {move_forward();}
+if(digitalRead(ir_sensor)==LOW) 
+  {
+  robot_stop();delay(1000);
+  move_backward();
+  delay(1000);
+  } 
+ 
+}
